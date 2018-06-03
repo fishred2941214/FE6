@@ -1,0 +1,17 @@
+
+#main {
+    background-color: burlywood;
+    text-align: center;
+}
+
+
+#head {
+    display: flex;
+    flex-direction: row;
+}
+
+
+td {
+    padding-right: 10px;
+    text-align: center;
+}

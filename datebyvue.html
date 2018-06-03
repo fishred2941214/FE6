@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /> 
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <title>DateByVue</title>
+    <link rel="stylesheet" href="datebyvue.css">
+  </head>
+  <body>
+      <div id = "main">
+        <div id = "headmessage">  
+        <button id = "last" @click="lastmonth(currentYear,currentMonth)"><</button>
+          <div id = "yearandmonth">
+              {{nowYear}}年{{nowMonth}}月
+          </div>
+          <button id = "next" @click="nextmonth(currentYear,currentMonth)">></button>
+        </div>
+          <div id = "exactdate">
+            <ul id = "weekday">
+                
+                    <li>Sun</li>
+                    <li>Mon</li>
+                    <li>Tue</li>
+                    <li>Wed</li>
+                    <li>Thu</li>
+                    <li>Fri</li>
+                    <li>Sat</li>
+                
+            </ul>
+            
+            <ul id = "date">
+                <li  v-for = "day in days">
+                {{day.getDate()}}
+                </li>
+            </ul>
+            
+
+        </div>
+      </div>
+      <script>
+          var myVue = new Vue({
+              el:'#main',
+              data:{
+                  nowDay:24,
+                  nowYear:2018,
+                  nowMonth:5,
+                  nowWeek:0,
+                  days:[],
+                  
+              },
+              
+              created: function() {  
+                  this.createdate(null);
+              },
+
+              methods:{
+                    createdate: function(cur) {
+                        var leftcount=0;
+                        var date;
+        
+        
+                        if (cur!=null) {
+                            date = new Date(cur);
+                        } else {
+                            var now=new Date();
+                            var d = new Date(this.formatDate(now.getFullYear() , now.getMonth() , 1));
+                            d.setDate(35);
+                            date = new Date(this.formatDate(d.getFullYear(),d.getMonth() + 1,1));
+                        }
+                        this.nowDay = date.getDate();
+                        this.nowYear = date.getFullYear();
+                        this.nowMonth = date.getMonth() + 1;
+        
+                        this.nowWeek = date.getDay(); 
+                        if (this.nowWeek == 0) {
+                            this.nowWeek = 7;
+                        }
+                        var str = this.formatDate(this.nowYear , this.nowMonth, this.nowDay);
+                        this.days.length = 0;
+                      
+                        for (var i = this.nowWeek - 1; i >= 0; i--) {
+                            var d = new Date(str);
+                            d.setDate(d.getDate() - i);
+                            
+                            day=d;
+                            this.days.push(day);
+        
+        
+                        }
+                        
+                        for (var i = 1; i <= 35 - this.nowWeek; i++) {
+                            var d = new Date(str);
+                            d.setDate(d.getDate() + i);
+                        
+                            day=d;
+                            this.days.push(day);
+                        }
+        
+                    },
+                    lastmonth: function(year, month) {
+        
+                       
+                        var d = new Date(this.formatDate(year , month , 1));
+                        d.setDate(0);
+                        this.createdate(this.formatDate(d.getFullYear(),d.getMonth() + 1,1));
+                    },
+                    nextmonth: function(year, month) {
+                        var d = new Date(this.formatDate(year , month , 1));
+                        d.setDate(35);
+                        this.createdate(this.formatDate(d.getFullYear(),d.getMonth() + 1,1));
+                    },
+                    
+                    formatDate: function(year,month,day){
+                        var y = year;
+                        var m = month;
+                        if(m<10) m = "0" + m;
+                        var d = day;
+                        if(d<10) d = "0" + d;
+                        return y+"-"+m+"-"+d
+                    },
+        
+        
+                },
+        
+            
+
+
+          })
+      </script>
+  </body>
+</html>

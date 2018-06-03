@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /> 
+    <title>Date</title>
+    <link rel="stylesheet" href="date.css">
+  </head>
+<body>
+    <div id = "main">
+        <div id = "head">
+            <div id = "lastpage">
+                <button id = "last" onclick = "lastMonth()">上一页</button>
+            </div>
+            <div id = "yearandmonth"></div>
+            <div id = "nextpage">
+                <button id = "next" onclick="nextMonth()">下一页</button>
+            </div>
+        </div>
+        <div id = "exactdate">
+            <table id = "week" border="1">
+                <tr>
+                    <td>日</td>
+                    <td>一</td>
+                    <td>二</td>
+                    <td>三</td>
+                    <td>四</td>
+                    <td>五</td>
+                    <td>六</td>
+                </tr>
+            </table>
+            <table id = "realdate" border="1"></table>
+            
+
+        </div>
+    </div>
+    <script>
+        var nowDate = new Date();
+        var nowYear = nowDate.getFullYear();
+        var nowDay = nowDate.getDay();
+        var nowMonth = nowDate.getMonth()+1;
+        var yearandmonth = document.getElementById("yearandmonth");
+        yearandmonth.innerHTML = nowYear+"年"+nowMonth+"月";
+        var days1 = [31,28,31,30,31,30,31,31,30,31,30,31];
+        var days2 = [31,29,31,30,31,30,31,31,30,31,30,31];
+       
+        
+        
+        function isLeapYear(){
+            if(((nowYear % 4)==0) && ((nowYear % 100)!=0) || ((nowYear % 400)==0)) {
+                return days2;
+            } else {
+                return days1;
+            }
+
+        }
+        
+      
+        function createdate(year,month){
+            var dt = new Date(year,month-1,1);
+            var firstday = dt.getDay()+1;
+            var datetable = document.getElementById("realdate");
+            var monthdays = isLeapYear();
+            var rows = 6;
+            var cols = 7;
+            var k = 1;
+            for(var i = 1;i <=rows;i++)
+            {
+                if(k>monthdays[month-1])
+                {
+                        break;
+                }
+                var tri = datetable.insertRow();
+                for(var j = 1;j <= cols;j++)
+                {
+                    var tdi = tri.insertCell();
+                    if(i==1&&j<firstday)
+                    {
+                        tdi.innerHTML = "";
+                    }
+                    else
+                    if(k>monthdays[month-1])
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        tdi.innerHTML = k;
+                        k++;
+                    }
+                }
+            }
+
+
+        }
+        
+
+        function nextMonth(){
+            var datetable = document.getElementById("realdate");
+            datetable.innerHTML = "";
+            if(nowMonth<12)
+            {
+                nowMonth++;
+            }
+            else{
+                nowYear++;
+                nowMonth = 1;
+            }
+            var text = document.getElementById("yearandmonth");
+            text.innerHTML =  nowYear+"年"+nowMonth+"月";
+            createdate(nowYear,nowMonth);
+
+        }
+
+
+        function lastMonth(){
+            var datetable = document.getElementById("realdate");
+            datetable.innerHTML = "";
+            if(nowMonth>1)
+            {
+                nowMonth--;
+            }
+            else{
+                nowYear--;
+                nowMonth = 12;
+            }
+            var text = document.getElementById("yearandmonth");
+            text.innerHTML =  nowYear+"年"+nowMonth+"月";
+            createdate(nowYear,nowMonth);
+
+
+        }
+        createdate(nowYear,nowMonth);
+
+    </script>
+
+</body>
