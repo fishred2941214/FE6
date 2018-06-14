@@ -10,11 +10,11 @@
   <body>
       <div id = "main">
         <div id = "headmessage">  
-        <button id = "last" @click="lastmonth(currentYear,currentMonth)"><</button>
+        <button id = "last" @click="lastmonth(nowYear,nowMonth)"><</button>
           <div id = "yearandmonth">
               {{nowYear}}年{{nowMonth}}月
           </div>
-          <button id = "next" @click="nextmonth(currentYear,currentMonth)">></button>
+          <button id = "next" @click="nextmonth(nowYear,nowMonth)">></button>
         </div>
           <div id = "exactdate">
             <ul id = "weekday">
@@ -31,7 +31,8 @@
             
             <ul id = "date">
                 <li  v-for = "day in days">
-                {{day.getDate()}}
+                <span v-if="day.getFullYear() == new Date().getFullYear() && day.getMonth() == new Date().getMonth() && day.getDate() == new Date().getDate()" class="active">{{day.getDate()}}</span>
+                <span v-else>{{day.getDate()}}</span>
                 </li>
             </ul>
             
