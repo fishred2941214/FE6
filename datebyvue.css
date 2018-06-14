@@ -1,0 +1,114 @@
+#weekday {
+    margin: 0;
+    padding: 10px 0;
+    width: 100%;
+    color:whitesmoke;
+    overflow: hidden;
+    box-shadow: inset 0px -3px 0px rgba(255,255,255,0.1);
+    height: 50px;
+}
+
+
+#weekday li{
+    width: 10%;
+    text-align: center;
+    list-style: none;
+    margin-bottom: 10px;
+    margin-left: 1%;
+    padding: 10px 0;
+   
+    padding-left: 10px;
+    float: left;
+
+   
+
+}
+#date {
+    justify-content: space-around;
+    margin: 0;
+    padding: 10px 0;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: inset 0px 1px 0px rgba(0,0,0,0.1);
+}
+
+
+
+#date li {
+    width: 10%;
+    text-align: center;
+    list-style: none;
+    margin-bottom: 10px;
+    margin-left: 4px;
+    padding: 10px 0;
+    padding-top: 6%;
+    padding-left: 9px;
+    float: left;
+   
+}
+
+
+/* datebyvue.css (45, 15) */
+#headmessage {
+    display: flex;
+    justify-content: space-between;
+ 
+    border-radius: 10px 10px 0 0;
+}
+
+/* datebyvue.css (49, 8) */
+#main {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+
+/* http://127.0.0.1:5500/FE6/datebyvue.html */
+
+/* http://127.0.0.1:5500/FE6/datebyvue.html */
+body {
+    font-family: 微软雅黑;
+    background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b);
+}
+
+#last {
+    border: none;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    background: none;
+    margin-left: 20px;
+}
+
+#last:hover{
+    color:rgb(96, 66, 126);
+}
+#next{
+    border: none;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    background: none;
+    margin-right: 20px;
+}
+#next:hover{
+    color:rgb(96, 66, 126)
+}
+#yearandmonth {
+    margin-top: 10px;
+}
+
+.active{
+    
+    color: rgba(143, 188, 143, 0.774);
+    
+}
+
+.weekend{
+    color:darkred;
+}
